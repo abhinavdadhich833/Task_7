@@ -1,0 +1,69 @@
+Front-end code for HTML
+
+
+<html>
+
+<h1> hello Abhinav welcome to docker world ..</h1>
+
+<script>
+
+ function lw(){
+var  i =  document.getElementById("in1").value
+var xhr = new XMLHttpRequest();
+//xhr.onload
+
+xhr.open("GET","http://192.168.0.110/cgi-bin/s.py?x=" + i ,true);
+xhr.send();
+
+// output from above url
+xhr.onload = function (){
+                var output = xhr.responseText;
+                document.getElementById("d1").innerHTML = output;
+}
+}
+
+</script>
+[root@localhost ~ ] # :<input id="in1" />
+<br />
+<pre>
+<div id="d1">here we have output </div>
+</pre>
+<button onclick="lw()">click</button>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+Back-end code in python
+
+
+
+#!/usr/bin/python3
+
+import cgi
+import subprocess
+import time
+
+print("content-type: text/html")
+print()
+f = cgi.FieldStorage()
+cmd = f.getvalue("x")
+print(" <h2>Your Command is :-</h2>",cmd,"<h2> \n OutPut is :-</h2>")
+output = subprocess.getoutput("sudo " + cmd)
+print("*"*100)
+print()
+print(output)
+print()
+print("*"*100)
+time.sleep(3)
+print("<h1> thank you for using this Docker UI Page</h1>")
+
+
+
